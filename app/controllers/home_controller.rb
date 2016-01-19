@@ -5,6 +5,12 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @weddingInfo = WeddingInfo.all[0]
+		if @weddingInfo.nil?
+      @weddingInfo = WeddingInfo.create
+		end
+		@weddingInfo
+		@entrees = Entree.all
   end
 
 end

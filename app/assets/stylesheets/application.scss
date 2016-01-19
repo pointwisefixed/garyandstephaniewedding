@@ -1,2 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "quill/quill.base.css";
+@import "quill/quill.snow.css";
+
+.quill-wrapper {
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  box-shadow: 0px 0px 10px #ccc;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+  min-width: 320px;
+  width: 100%;
+}

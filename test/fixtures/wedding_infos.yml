@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hisInformation: MyText
+  herInformation: MyText
+  ourStory: MyText
+  ourFirstMeeting: MyText
+  ourFirstDate: MyText
+  proposal: MyText
+  theRing: MyText
+  whenAndWhereIsTheWedding: MyText
+  ceremony: MyText
+  reception: MyText
+  accomodations: MyText
+  attending: MyText
+  ourGallery: MyText
+  dontMissIt: MyText
+  moreEvents: MyText
+  dancingParty: MyText
+  flowerAndFlowers: MyText
+  groomsmen: MyText
+  bestFriend: MyText
+  bridesmaid: MyText
+  maidOfHonor: MyText
+  bestMan: MyText
+  bestBrideFriend: MyText
+  giftRegistry: MyText
+  rsvpInfo: MyText
+
+two:
+  hisInformation: MyText
+  herInformation: MyText
+  ourStory: MyText
+  ourFirstMeeting: MyText
+  ourFirstDate: MyText
+  proposal: MyText
+  theRing: MyText
+  whenAndWhereIsTheWedding: MyText
+  ceremony: MyText
+  reception: MyText
+  accomodations: MyText
+  attending: MyText
+  ourGallery: MyText
+  dontMissIt: MyText
+  moreEvents: MyText
+  dancingParty: MyText
+  flowerAndFlowers: MyText
+  groomsmen: MyText
+  bestFriend: MyText
+  bridesmaid: MyText
+  maidOfHonor: MyText
+  bestMan: MyText
+  bestBrideFriend: MyText
+  giftRegistry: MyText
+  rsvpInfo: MyText
