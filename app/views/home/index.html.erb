@@ -235,7 +235,7 @@
                             </div>                            
                             
                             <p class="blurb animation fadeInLeft text-center">
-			    <%= @weddingInfo.hisInformation%>
+			    <%= @weddingInfo.hisInformation.html_safe%>
                             </p>
                             
                         </div>
@@ -280,7 +280,7 @@
                             </div>                            
                             
                             <p class="blurb animation fadeInRight text-center">
-			    <%= @weddingInfo.herInformation %>
+			    <%= @weddingInfo.herInformation.html_safe %>
                             </p>
                             
                         </div>
@@ -312,7 +312,7 @@
                             	</h2>
                             
 				<p>
-				<%= @weddingInfo.ourStory %>
+				<%= @weddingInfo.ourStory.html_safe %>
                             	</p>
                             
                             	
@@ -365,7 +365,7 @@
                         
                         <div class="col-sm-12 col-md-4 animation delay1 fadeInRight">
                         	<h3>OUR FIRST MEETING</h3>
-				<p><%= @weddingInfo.ourFirstMeeting %></p>                            
+				<p><%= @weddingInfo.ourFirstMeeting.html_safe %></p>                            
                         </div>    
                         
                         <div class="vertical-line">
@@ -417,7 +417,7 @@
                         
                         <div class="col-sm-12 col-md-4 col-md-pull-6 animation delay1 fadeInRight">
                         	<h3>OUR FIRST DATE</h3>
-				<p> <%= @weddingInfo.ourFirstDate %></p>                            
+				<p> <%= @weddingInfo.ourFirstDate.html_safe %></p>                            
                         </div>    
                         
                         <div class="vertical-line">
@@ -469,7 +469,7 @@
                         
                         <div class="col-md-4 animation delay1 fadeInRight">
                         	<h3>HE PROPOSED</h3>
-				<p><%= @weddingInfo.proposal %> </p>
+				<p><%= @weddingInfo.proposal.html_safe %> </p>
                             
                         </div>    
                         
@@ -522,7 +522,7 @@
                         
                         <div class="col-sm-12 col-md-4 col-md-pull-6 animation delay1 fadeInRight">
                         	<h3>THE RING</h3>
-				<p><%= @weddingInfo.theRing %> </p>                            
+				<p><%= @weddingInfo.theRing.html_safe %> </p>                            
                         </div>    
                         
                         <div class="vertical-line">
@@ -569,7 +569,7 @@
                             		WHERE <span class="and">&amp;</span> WHERE
                             	</h2>
                             
-                            	<p> <%= @weddingInfo.whenAndWhereIsTheWedding %></p>
+                            	<p> <%= @weddingInfo.whenAndWhereIsTheWedding.html_safe %></p>
                             
                             	
                           	</div>
@@ -614,19 +614,19 @@
                             	<i class="de-icon-bell-alt"></i>
                             </div>
                             <h3 class="inline">CEREMONY</h3>
-			    <p><%= @weddingInfo.ceremony %></p>
+			    <p><%= @weddingInfo.ceremony.html_safe %></p>
                                
                        		<div class="de-icon circle small-size inline" style="background-color:#f6700e">
                             	<i class="de-icon-food"></i>
                             </div>
                             <h3 class="inline">RECEPTION</h3>
-			    <p><%= @weddingInfo.reception %></p>
+			    <p><%= @weddingInfo.reception.html_safe %></p>
                             
 							<div class="de-icon circle small-size inline" style="background-color:#0d9a48">
                             	<i class="de-icon-home-1"></i>
                             </div>
                             <h3 class="inline">ACCOMODATION</h3>
-			    <p><%= @weddingInfo.accomodations %></p>                            
+			    <p><%= @weddingInfo.accomodations.html_safe %></p>                            
                                                        
                         </div>
                         
@@ -654,7 +654,7 @@
                 	 			
                                 
                                 <div class="text-center animation fadeInUp">
-					<p><%= @weddingInfo.attending %></p>
+					<p><%= @weddingInfo.attending.html_safe %></p>
                                 </div>  
                                 
                                 <div  class="text-center">
@@ -688,7 +688,7 @@
                             	</h2>
                             
                             	<p>
-				<%= @weddingInfo.ourGallery %>	
+				<%= @weddingInfo.ourGallery.html_safe %>	
                             	</p>
                             
                             	
@@ -1073,7 +1073,7 @@
                                 <h2 id="dont-miss-it-title" class="text-center animation fadeInUp">Don't Miss It!</h2>                               
                                 
                                 <div class="text-center animation fadeInUp">
-					<p><%=@weddingInfo.dontMissIt %></p>
+					<p><%=@weddingInfo.dontMissIt.html_safe %></p>
                                 </div>
                                 
                      		</div>
@@ -1109,7 +1109,7 @@
                             	</h2>
                             
                             	<p>
-				<%= @weddingInfo.groomsmen%>	
+				<%= @weddingInfo.groomsmen.html_safe %>	
                             	</p>
                             
                             	
@@ -1131,7 +1131,7 @@
                         		<div class="photo-item frame-border animation fadeIn">
                                 	
                              		<!--PHOTO-->
-                               		<img src="http://placehold.it/293x325" alt="" class="hover-animation image-zoom-rotate">
+                               		<img src="images/erwin.jpg" alt="" class="hover-animation image-zoom-rotate">
                                             
                                		<!--PHOTO OVERLAY-->
                            			<div class="layer wh100 hidden-black-overlay hover-animation fade-in">
@@ -1142,7 +1142,7 @@
                                     	<div class="alignment">
                                     		<div class="v-align center-middle">
                                            
-                                     			<a href="http://placehold.it/293x325" class="magnific-zoom">
+                                     			<a href="images/erwin.jpg" class="magnific-zoom">
         											<div class="de-icon circle light medium-size inline">
             											<i class="de-icon-zoom-in"></i>
             										</div>
@@ -1158,7 +1158,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">BEST MAN</a></h3>
-						<p><%= @weddingInfo.bestMan %></p>
+						<p><%= @weddingInfo.bestMan.html_safe %></p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
@@ -1205,7 +1205,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">BEST FRIEND</a></h3>
-						<p><%= @weddingInfo.bestFriend %> </p>
+						<p><%= @weddingInfo.bestFriend.html_safe %> </p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
@@ -1233,7 +1233,7 @@
                             	</h2>
                             
                             	<p>
-				<%= @weddingInfo.bridesmaid %>           	</p>
+				<%= @weddingInfo.bridesmaid.html_safe %>           	</p>
                             
                             	
                           	</div>
