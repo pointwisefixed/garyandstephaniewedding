@@ -1416,40 +1416,46 @@
 													  Something happened while updating your info, try again later.
 													</div>
 
-												 <div class="col-md-6">
+													<div class="col-md-6">
+																	<% editable = current_user.rsvp_edit_dateline.nil? || current_user.rsvp_edit_dateline > DateTime.now%>
 																	 <%= form_for current_user, html: { id: "updateForm"}, remote: true, :url => url_for(:id => current_user.id, :controller => 'users', :action => 'update') do |f| %>
 																	 <div class="form-group">
 																	 <%= f.label(:email, "Registration Email") %>
-																	 <%= f.text_field(:email, :class => 'form-control', :required => true) %>
+																	 <%= f.text_field(:email, :class => 'form-control', :required => true, :disabled => !editable) %>
 													 </div>
 													 <div class="form-group" id="attending-group">
-																	 <%= f.check_box(:attending, id: "attendingcbox") %>
+																	 <%= f.check_box(:attending, id: "attendingcbox", :disabled => !editable) %>
 																		 <%= f.label(:attending, "RSVP" ) %>
-													 </div>
+														 </div>
+
+														 <% if current_user.can_bring_plus_one? %>
 													 <div class="form-group" id="plus-one-group">
-																	 <%= f.check_box(:plusone, id: "plusonecbox") %>
+																	 <%= f.check_box(:plusone, id: "plusonecbox", :disabled => !editable) %>
 																	 <%= f.label(:plusone, "Bringing a +1?") %>
 														 </div>
 													 <div class="form-group" id="plus-one-fn-group">
 																	 <%= f.label(:plus_one_first_name, "+1 First Name" ) %>
-																	 <%= f.text_field(:plus_one_first_name, :class => 'form-control' ) %>
+																	 <%= f.text_field(:plus_one_first_name, :class => 'form-control' , :disabled => !editable) %>
 													 </div>
 													 <div class="form-group" id="plus-one-ln-group">
 																	<%= f.label(:plus_one_last_name, "+1 Last Name") %>
-																	 <%= f.text_field(:plust_one_last_name, :class => 'form-control' ) %>
+																	 <%= f.text_field(:plust_one_last_name, :class => 'form-control' , :disabled => !editable) %>
 													 </div>
+									 <% end %>
 													 <div class="form-group" id="entree-group">
 																	 <%= f.label(:entree_id, "Your Chosen Entree") %>
-																	 <%= f.collection_select(:entree_id, Entree.all, :id, :description, prompt: 'Select an Entree for you', :class => 'form-control', :required => true ) %>
+																	 <%= f.collection_select(:entree_id, Entree.all, :id, :description, {:prompt => 'Select An Entree For You'}, {:class => 'form-control', :required => true, :disabled => !editable}) %>
 													 </div>
+													 <% if current_user.can_bring_plus_one? %>
 													 <div class="form-group" id="plus-one-entree-group">
 																	 <%= f.label(:plus_one_entree_id, "Your +1 Chosen Entree") %>
-																	 <%= f.collection_select(:plus_one_entree_id, Entree.all, :id, :description, prompt: 'Select an Entree for your +1', :class => 'form-control') %>
+																	 <%= f.collection_select(:plus_one_entree_id, Entree.all, :id, :description, {:prompt => 'Select an Entree for your +1'}, {:class => 'form-control', :disabled => !editable}) %>
 													 </div>
+									 <% end %>
 
 	                       <div class="col-md-12 text-center">
                         	<div class="form-group">
-																	<%= f.submit "Update Information" , :class => "buttom medium reverse", :id => "updateButton"%>
+																	<%= f.submit "Update Information" , :class => "buttom medium reverse", :id => "updateButton", :disabled => !editable%>
 												 <% end %>
 								 </div>
 				 </div>

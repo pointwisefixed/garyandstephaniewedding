@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118232407) do
+ActiveRecord::Schema.define(version: 20160125002407) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 20160118232407) do
     t.string   "plust_one_last_name"
     t.integer  "entree_id"
     t.integer  "plus_one_entree_id"
+    t.datetime "rsvp_edit_dateline"
+    t.boolean  "can_bring_plus_one",     default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
