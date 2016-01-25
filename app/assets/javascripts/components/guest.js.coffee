@@ -31,6 +31,12 @@
       React.DOM.td null, @props.guest.first_name
       React.DOM.td null, @props.guest.last_name
       React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          disabled: 'disabled'
+          defaultChecked: @props.guest.admin
+      React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'
           onClick: @handleToggle
@@ -53,6 +59,12 @@
           type: 'text'
           defaultValue: @props.guest.last_name
           ref: 'last_name'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          defaultChecked: @props.guest.admin
+          ref: 'admin'
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'

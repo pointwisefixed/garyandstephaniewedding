@@ -1,13 +1,13 @@
 class GuestsController < ApplicationController
-
+  before_filter :verify_is_admin
   before_action :authenticate_user!
-
-  def index
-    @guests = Guest.all
+  
+	def index
+    @guests = User.all
   end
 
   def create
-    @guest = Guest.create(guest_params)
+    @guest = User.create(guest_params)
 
     if @guest.save
       render json: @guest
@@ -17,13 +17,13 @@ class GuestsController < ApplicationController
   end
 
   def destroy
-    @guest = Guest.find(params[:id])
+    @guest = User.find(params[:id])
     @guest.destroy
     head :no_content
   end
 
   def update
-    @guest = Guest.find(params[:id])
+    @guest = User.find(params[:id])
     if @guest.update(guest_params)
       render json: @guest
     else
@@ -34,7 +34,12 @@ class GuestsController < ApplicationController
   private
 
     def guest_params
-      params.require(:guest).permit(:first_name, :last_name)
+      params.require(:guest).permit(:password, :first_name, :last_name, :email, :admin, :attending, :plusone, :first_name, :last_name, :address1, :address2, :zipcode, :city, :state, :state, :country, :username, :plus_one_first_name, :plust_one_last_name, :entree_id, :plus_one_entree_id, :rsvp_edit_dateline, :can_bring_plus_one)
     end
+
+	  def verify_is_admin
+	    (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
+	  end
+
 
 end

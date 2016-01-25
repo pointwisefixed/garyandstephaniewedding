@@ -28,6 +28,7 @@
           React.DOM.tr null,
             React.DOM.th null, 'First Name'
             React.DOM.th null, 'Last Name'
+            React.DOM.th null, 'Is Admin?'
             React.DOM.th null, 'Action'
         React.DOM.tbody null,
           for guest in @state.guests
