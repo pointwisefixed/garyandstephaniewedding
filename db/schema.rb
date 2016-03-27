@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125002407) do
+ActiveRecord::Schema.define(version: 20160327071550) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160125002407) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
+    t.string   "email",                  default: ""
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20160125002407) do
     t.boolean  "can_bring_plus_one",     default: true
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["entree_id"], name: "index_users_on_entree_id"
   add_index "users", ["plus_one_entree_id"], name: "index_users_on_plus_one_entree_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
