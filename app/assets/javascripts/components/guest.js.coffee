@@ -17,6 +17,8 @@
     data =
       first_name: React.findDOMNode(@refs.first_name).value
       last_name: React.findDOMNode(@refs.last_name).value
+      username: React.findDOMNode(@refs.username).value
+      email: React.findDOMNode(@refs.email).value
     $.ajax
       method: 'PUT'
       url: "/guests/#{ @props.guest.id }"
@@ -30,6 +32,8 @@
     React.DOM.tr null,
       React.DOM.td null, @props.guest.first_name
       React.DOM.td null, @props.guest.last_name
+      React.DOM.td null, @props.guest.username
+      React.DOM.td null, @props.guest.email
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'
@@ -59,6 +63,18 @@
           type: 'text'
           defaultValue: @props.guest.last_name
           ref: 'last_name'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'text'
+          defaultValue: @props.guest.username
+          ref: 'username'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'text'
+          defaultValue: @props.guest.email
+          ref: 'email'
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'

@@ -163,10 +163,14 @@
                             </li>
                             <li>
                             	<a href="#bridesmaid-section">BRIDESMAID</a>
-                            </li>                           
+                              </li>
+                            <% if user_signed_in? %>
                             <li>
                             	<a href="#rsvp-section">RSVP</a>
-                            </li>
+                              </li>
+                            <% else %>
+                              <%= link_to('RSVP', new_user_session_path) %>
+                            <% end %>
                            <%= render 'devise/menu/login_items' %> 	
                 		</ul>
                     
@@ -658,12 +662,16 @@
                                 </div>  
                                 
                                 <div  class="text-center">
+                                  <% if user_signed_in? %>
                                 	<a href="#rsvp-section" class="smooth-scroll de-button outline medium animation fadeInUp">
                                     	RSVP
                                   	</a>
-                                </div>
-
-                     
+                              <% else %>
+                                  <a href="/users/sign_in" class="smooth-scroll de-button outline medium animation fadeInUp">
+                                    RSVP
+                                  </a>
+                                <% end %>
+                              </div> 
                      		</div>
                      	</div>
                      </div>
