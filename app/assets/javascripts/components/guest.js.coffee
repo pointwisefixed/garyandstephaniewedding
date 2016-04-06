@@ -49,9 +49,8 @@
           type: 'checkbox'
           disabled: 'disabled'
           defaultChecked: @props.guest.plusone
-      React.DOM.td null, @props.guest.entree_id
       React.DOM.td null,
-        React.createElement Dropdown, id: 'entree', options: @props.entrees, value: @props.guest.entree_id, labelField: 'description', valueField: 'id'
+        React.createElement Dropdown, id: 'entree', disabled: 'disabled', options: @props.entrees, value: @props.guest.entree_id, labelField: 'description', valueField: 'id'
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'

@@ -1,5 +1,4 @@
-'use strict'
-Dropdown = React.createClass(
+@Dropdown = React.createClass(
   displayName: 'Dropdown'
   propTypes:
     id: React.PropTypes.string.isRequired
@@ -8,6 +7,7 @@ Dropdown = React.createClass(
       React.PropTypes.number
       React.PropTypes.string
     ])
+    disabled: React.PropTypes.string
     valueField: React.PropTypes.string
     labelField: React.PropTypes.string
     onChange: React.PropTypes.func
@@ -20,7 +20,8 @@ Dropdown = React.createClass(
     }
   getInitialState: ->
     selected = @getSelectedFromProps(@props)
-    { selected: selected }
+    disabled = @props.disabled
+    { selected: selected, disabled: disabled }
   componentWillReceiveProps: (nextProps) ->
     selected = @getSelectedFromProps(nextProps)
     @setState selected: selected
@@ -45,6 +46,7 @@ Dropdown = React.createClass(
       className: 'form-control'
       value: @state.selected
       onChange: @handleChange
+      disabled: @state.disabled
     }, options
   handleChange: (e) ->
     if @props.onChange
