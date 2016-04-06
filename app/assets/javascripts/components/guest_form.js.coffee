@@ -5,8 +5,11 @@
     email: ''
     password: ''
     username: ''
-		can_bring_plus_one: false
-		rsvp_edit_dateline: ''
+    can_bring_plus_one: false
+    rsvp_edit_dateline: ''
+    attending: false
+    plusone: false
+    entree_id: 0
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '', {guest: @state}, (data) =>
@@ -78,6 +81,37 @@
           className: 'form-control'
           name: 'can_bring_plus_one'
           value: @state.can_bring_plus_one
+          onChange: @handleChange
+      React.DOM.div
+        className: 'form-group'
+        React.DOM.label
+          htmlFor: 'plus_one'
+          'plus one?'
+        React.DOM.input
+          type: 'checkbox'
+          className: 'form-control'
+          name: 'plus_one'
+          value: @state.plusone
+          onChange: @handleChange
+      React.DOM.div
+        className: 'form-group'
+        React.DOM.label
+          htmlFor: 'rsvp'
+          'rsvp?'
+        React.DOM.input
+          type: 'checkbox'
+          className: 'form-control'
+          name: 'rsvp'
+          value: @state.attending
+          onChange: @handleChange
+      React.DOM.div
+        className: 'form-group'
+        React.DOM.input
+          type: 'text'
+          placeholder: 'food Selection'
+          className: 'form-control'
+          name: 'food_selection'
+          value: @state.entree_id
           onChange: @handleChange
       React.DOM.button
         type: 'submit'

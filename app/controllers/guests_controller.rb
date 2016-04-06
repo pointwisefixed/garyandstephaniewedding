@@ -4,6 +4,7 @@ class GuestsController < ApplicationController
   
 	def index
     @guests = User.all
+    @entrees = Entree.all
   end
 
   def create

@@ -1,8 +1,9 @@
-<h2>Log in</h2>
+ <div class ="container" style="width: 40%">			
+ <h2>Log in</h2>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-				<div class ="col-md-3">			
+    <div class="span12">
 <div class="form-group">
-    <%= f.label :login %>
+    <%= f.label :login, 'Login is firstname.lastname' %>
 		<%= f.text_field :login, :class => 'form-control' %>
 </div>
 
@@ -13,15 +14,16 @@
 
   <% if devise_mapping.rememberable? -%>
     <div class="form-group">
-						<%= f.check_box :remember_me , :class => 'form-control'%>
+			<%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end -%>
 
-  <div class="actions form-group">
+  <div class="actions form-group pull-right">
 					<%= f.submit "Log in", :class => 'button'%>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+</div>
+</div>
 </div>

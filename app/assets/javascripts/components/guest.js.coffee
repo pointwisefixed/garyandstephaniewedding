@@ -19,6 +19,9 @@
       last_name: React.findDOMNode(@refs.last_name).value
       username: React.findDOMNode(@refs.username).value
       email: React.findDOMNode(@refs.email).value
+      attending: React.findDOMNode(@refs.rsvp).value
+      plusone: React.findDOMNode(@refs.plus_one).value
+      entree_id: React.findDOMNode(@refs.food_selection).value
     $.ajax
       method: 'PUT'
       url: "/guests/#{ @props.guest.id }"
@@ -34,6 +37,21 @@
       React.DOM.td null, @props.guest.last_name
       React.DOM.td null, @props.guest.username
       React.DOM.td null, @props.guest.email
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          disabled: 'disabled'
+          defaultChecked: @props.guest.attending
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          disabled: 'disabled'
+          defaultChecked: @props.guest.plusone
+      React.DOM.td null, @props.guest.entree_id
+      React.DOM.td null,
+        React.createElement Dropdown, id: 'entree', options: @props.entrees, value: @props.guest.entree_id, labelField: 'description', valueField: 'id'
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'
@@ -75,6 +93,24 @@
           type: 'text'
           defaultValue: @props.guest.email
           ref: 'email'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          defaultChecked: @props.guest.attending
+          ref: 'rsvp'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'checkbox'
+          defaultChecked: @props.guest.plusone
+          ref: 'plus_one'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'text'
+          defaultValue: @props.guest.entree_id
+          ref: 'food_selection'
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'
