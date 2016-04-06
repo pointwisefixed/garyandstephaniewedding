@@ -5,6 +5,7 @@ class GuestsController < ApplicationController
 	def index
     @guests = User.all
     @entrees = Entree.all
+    @entrees.unshift(Entree.new(:name => "None", :description => "Choose an entree", :id => -1))
   end
 
   def create
