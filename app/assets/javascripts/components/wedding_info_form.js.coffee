@@ -24,6 +24,7 @@
     bridesmaid: @props.weddingInfo.bridesmaid
     maidOfHonor: @props.weddingInfo.maidOfHonor
     bestBrideFriend: @props.weddingInfo.bestBrideFriend
+    bestfriendbridesmaid: @props.weddingInfo.bestfriendbridesmaid
     giftRegistry: @props.weddingInfo.giftRegistry
     rsvpInfo: @props.weddingInfo.rsvpInfo
 
@@ -292,13 +293,24 @@
           React.DOM.label
             htmlFor: 'bestBrideFriend'
             className: 'control-label'
-            'Best Friend of the Friend '
+            'Groom\'s sister'
           React.DOM.textarea
             className: 'form-control'
             name: 'bestBrideFriend'
             rows: 10
-            placeholder: 'Best Friend of the Bride info'
+            placeholder: 'Groom\'s sister info'
             value: @state.bestBrideFriend
+            onChange: @handleChange
+          React.DOM.label
+            htmlFor: 'bestfriendbridesmaid'
+            className: 'control-label'
+            'Best Friend of the Friend '
+          React.DOM.textarea
+            className: 'form-control'
+            name: 'bestfriendbridesmaid'
+            rows: 10
+            placeholder: 'Best Friend of the Bride info'
+            value: @state.bestfriendbridesmaid
             onChange: @handleChange
            React.DOM.label
             htmlFor: 'giftRegistry'

@@ -3,7 +3,7 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="span12">
 <div class="form-group">
-    <%= f.label :login, 'Login is firstname.lastname' %>
+    <%= f.label :login, 'Login is firstname.lastname all in lowercase.' %>
 		<%= f.text_field :login, :class => 'form-control' %>
 </div>
 

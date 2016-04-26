@@ -10,6 +10,7 @@
     attending: false
     plusone: false
     entree_id: 0
+    plus_one_entree_id: 0
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '', {guest: @state}, (data) =>
@@ -23,7 +24,7 @@
     @state.first_name && @state.last_name
   render: ->
     React.DOM.form
-      className: 'form-inline'
+      className: 'form-horizontal'
       onSubmit: @handleSubmit
       React.DOM.div
         className: 'form-group'
@@ -75,11 +76,11 @@
         className: 'form-group'
         React.DOM.label
           htmlFor: 'can_bring_plus_one'
-          'Can Bring plus one?'
+          'Can Bring Plus one?'
         React.DOM.input
           type: 'checkbox'
           className: 'form-control'
-          name: 'can_bring_plus_one'
+          name: 'Can Bring Plus_one'
           value: @state.can_bring_plus_one
           onChange: @handleChange
       React.DOM.div
@@ -90,7 +91,7 @@
         React.DOM.input
           type: 'checkbox'
           className: 'form-control'
-          name: 'plus_one'
+          name: 'Plus_one'
           value: @state.plusone
           onChange: @handleChange
       React.DOM.div
@@ -101,18 +102,21 @@
         React.DOM.input
           type: 'checkbox'
           className: 'form-control'
-          name: 'rsvp'
+          name: 'RSVP?'
           value: @state.attending
           onChange: @handleChange
       React.DOM.div
         className: 'form-group'
-        React.DOM.input
-          type: 'text'
-          placeholder: 'food Selection'
-          className: 'form-control'
-          name: 'food_selection'
-          value: @state.entree_id
-          onChange: @handleChange
+        React.DOM.label
+          htmlFor: 'entree_id'
+          'Guest Entree'
+        React.createElement Dropdown, id: 'entree_id', options: @props.entrees, value: @state.entree_id, labelField: 'description', valueField: 'id', onChange: @handleChange
+      React.DOM.div
+        className: 'form-group'
+        React.DOM.label
+          htmlFor: 'plus_one_entree_id'
+          'Plus One Entree'
+        React.createElement Dropdown, id: 'plus_one_entree_id', options: @props.entrees, value: @state.plus_one_entree_id, labelField: 'description', valueField: 'id', onChange: @handleChange
       React.DOM.button
         type: 'submit'
         className: 'btn btn-primary'

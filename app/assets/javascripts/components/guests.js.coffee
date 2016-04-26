@@ -6,22 +6,22 @@
     guests: []
   addGuest: (guest) ->
     guests = React.addons.update(@state.guests, { $push: [guest] })
-    @setState guests: guests, entrees: entrees
+    @setState guests: guests
   deleteGuest: (guest) ->
     index = @state.guests.indexOf guest
     guests = React.addons.update(@state.guests, { $splice: [[index, 1]]})
-    @replaceState guests: guests, entrees: entrees
+    @replaceState guests: guests
   updateGuest: (guest, data) ->
     index = @state.guests.indexOf guest
     guests = React.addons.update(@state.guests, { $splice: [[index, 1, data]]})
-    @replaceState guests: guests, entrees: entrees
+    @replaceState guests: guests
   render: ->
     React.DOM.div
-      className: 'guests'
+      className: 'guests container'
       React.DOM.h2
         className: 'title'
         'Guests'
-      React.createElement GuestForm, handleNewGuest: @addGuest
+      React.createElement GuestForm, handleNewGuest: @addGuest, entrees: @props.entrees
       React.DOM.hr null
       React.DOM.table
         className: 'table table-bordered'

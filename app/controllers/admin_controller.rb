@@ -28,7 +28,7 @@ class AdminController < ApplicationController
 	  end
 
 	  def wedding_info_params
-	    params.require(:weddingInfo).permit(:hisInformation,:herInformation,:ourStory,:ourFirstMeeting,:ourFirstMeeting,:ourFirstDate,:proposal,:theRing,:whenAndWhereIsTheWedding,:ceremony,:reception,:accomodations,:attending,:ourGallery,:dontMissIt,:moreEvents,:dancingParty,:flowerAndFlowers,:groomsmen,:bestFriend,:bridesmaid,:maidOfHonor,:bestMan,:bestBrideFriend,:giftRegistry,:rsvpInfo)	  
+	    params.require(:weddingInfo).permit(:hisInformation,:herInformation,:ourStory,:ourFirstMeeting,:ourFirstMeeting,:ourFirstDate,:proposal,:theRing,:whenAndWhereIsTheWedding,:ceremony,:reception,:accomodations,:attending,:ourGallery,:dontMissIt,:moreEvents,:dancingParty,:flowerAndFlowers,:groomsmen,:bestFriend,:bridesmaid,:maidOfHonor,:bestMan,:bestBrideFriend,:giftRegistry,:rsvpInfo, :bestfriendbridesmaid)	  
 	  end
 
 end

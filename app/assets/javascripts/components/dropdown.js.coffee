@@ -17,11 +17,16 @@
       valueField: 'value'
       labelField: 'label'
       onChange: null
+      disabled: ''
     }
   getInitialState: ->
     selected = @getSelectedFromProps(@props)
-    disabled = @props.disabled
-    { selected: selected, disabled: disabled }
+    disabled = null
+    if !!@props.disabled
+      disabled = @props.disabled
+      { selected: selected, disabled: disabled }
+    else
+      { selected: selected}
   componentWillReceiveProps: (nextProps) ->
     selected = @getSelectedFromProps(nextProps)
     @setState selected: selected
@@ -41,18 +46,21 @@
         value: option[self.props.valueField]
       }, option[self.props.labelField]
     )
-    React.createElement 'select', {
+    selectAttributes = {
       id: @props.id
       className: 'form-control'
       value: @state.selected
       onChange: @handleChange
-      disabled: @state.disabled
-    }, options
+    }
+    if !!@props.disabled
+      selectAttributes['disabled'] = 'disabled'
+    React.createElement 'select', selectAttributes, options
   handleChange: (e) ->
     if @props.onChange
-      change = 
+      change = { 
         oldValue: @state.selected
         newValue: e.target.value
+      }
       @props.onChange change
     @setState selected: e.target.value
     return

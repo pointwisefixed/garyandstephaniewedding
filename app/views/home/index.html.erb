@@ -1065,7 +1065,7 @@
                         <div class="row">
                         	<div class="col-md-offset-3 col-md-6">                   	
                 	 			
-                           		<div id="date-countdown" class="circle-countdown animation fadeInUp"></div>                     
+                           		<div id="date-countdown" class="circle-countdown animation fadeInUp" style="color: black;"></div>                     
 											</div>
 
 							</div>
@@ -1073,7 +1073,7 @@
         	<div class="row">
                         	<div class="col-md-offset-2 col-md-8">                   	
                 	 			
-                         <h2 id="dont-miss-it-title" class="text-center animation fadeInUp">Don't Miss It!</h2>                               
+                         <h2 id="dont-miss-it-title" class="text-center animation fadeInUp" style="color: black;">Don't Miss It!</h2>                               
 								                                <div class="text-center animation fadeInUp">
 					<p><%=@weddingInfo.dontMissIt.html_safe %></p>
                                 </div>
@@ -1174,7 +1174,7 @@
                         		<div class="photo-item frame-border animation fadeIn">
                                 	
                              		<!--PHOTO-->
-                               		<img src="http://placehold.it/293x325" alt="" class="hover-animation image-zoom-rotate">
+                               		<img src="images/christian_soto.jpg" alt="" class="hover-animation image-zoom-rotate">
                                             
                                		<!--PHOTO OVERLAY-->
                            			<div class="layer wh100 hidden-black-overlay hover-animation fade-in">
@@ -1185,7 +1185,7 @@
                                     	<div class="alignment">
                                     		<div class="v-align center-middle">
                                            
-                                     			<a href="http://placehold.it/293x325" class="magnific-zoom">
+                                     			<a href="images/christian_soto.jpg" class="magnific-zoom">
         											<div class="de-icon circle light medium-size inline">
             											<i class="de-icon-zoom-in"></i>
             										</div>
@@ -1331,7 +1331,54 @@
                             </div><!--END of BRIDESMAID-ITEM-->
                             
                         </div><!--END of BRIDESMAID-2-->
-		</div>                   	
+
+                        <!--BRIDESMAID-3-->
+                        <div class="col-md-4">
+                        	
+                            <!--BRIDESMAID-ITEM-->
+                            <div class="bridesmaid-item">
+                            
+                            	<!--PHOTO-ITEM-->
+                        		<div class="photo-item frame-border animation fadeIn">
+                                	
+                             		<!--PHOTO-->
+                               		<img src="images/alexandra_heinstein.jpg" alt="" class="hover-animation image-zoom-rotate">
+                                            
+                               		<!--PHOTO OVERLAY-->
+                           			<div class="layer wh100 hidden-black-overlay hover-animation fade-in">
+                            		</div><!--END of PHOTO OVERLAY-->
+                                				                                    
+                                	<!--ICON LINK-->
+                                	<div class="layer wh100 hidden-link hover-animation delay1 fade-in">
+                                    	<div class="alignment">
+                                    		<div class="v-align center-middle">
+                                           
+                                     			<a href="images/alecandra_heinstein.jpg" class="magnific-zoom">
+        											<div class="de-icon circle light medium-size inline">
+            											<i class="de-icon-zoom-in"></i>
+            										</div>
+        										</a>
+                                                
+                                      		</div>
+                                    	</div>
+                                	</div><!--END of ICON LINK-->
+							
+                            	</div><!--END of PHOTO-ITEM-->   
+                            
+                            	<!-- TITLE & EXCERPT -->
+                        		<div class="title-excerpt animation fadeIn text-center">
+                        
+                        			<h3 class="no-margin"><a href="#">BEST FRIEND</a></h3>
+						<p><%= @weddingInfo.bestfriendbridesmaid.html_safe %></p>
+                            
+                        		</div><!-- END of TITLE & EXCERPT -->
+                                
+                            </div><!--END of BRIDESMAID-ITEM-->
+                            
+                        </div><!--END of BRIDESMAID-1-->
+ 
+                      
+                      </div>                   	
               	</div>
            	
             </section>
