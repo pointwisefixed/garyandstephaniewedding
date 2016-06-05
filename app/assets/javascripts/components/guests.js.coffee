@@ -2,6 +2,7 @@
   getInitialState: ->
     guests: @props.data
     entrees: @props.entrees
+    attending_count: @props.attending_count
   getDefaultProps: ->
     guests: []
   addGuest: (guest) ->
@@ -39,3 +40,6 @@
         React.DOM.tbody null,
           for guest in @state.guests
             React.createElement Guest, key: guest.id, guest: guest, entrees: @state.entrees, handleDeleteGuest: @deleteGuest, handleEditGuest: @updateGuest
+          React.DOM.tr null,
+            React.DOM.td null, 'Total guests attending'
+            React.DOM.td null, @state.attending_count

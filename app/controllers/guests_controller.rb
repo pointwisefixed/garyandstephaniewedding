@@ -6,6 +6,7 @@ class GuestsController < ApplicationController
     @guests = User.all
     @entrees = Entree.all
     @entrees.unshift(Entree.new(:name => "None", :description => "Choose an entree", :id => -1))
+    @attending_count = User.where(:plusone => true).count + User.where(:attending => true).count
   end
 
   def create
