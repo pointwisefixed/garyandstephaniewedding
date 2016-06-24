@@ -169,7 +169,9 @@
                             	<a href="#rsvp-section">RSVP</a>
                               </li>
                             <% else %>
-                              <%= link_to('RSVP', new_user_session_path) %>
+                              <li>
+                                <%= link_to('RSVP', new_user_session_path) %>
+                              </li>
                             <% end %>
                            <%= render 'devise/menu/login_items' %> 	
                 		</ul>
@@ -1584,8 +1586,8 @@
         <!-- Owl Carousel -->
         <script src="js/owlcarousel/owl.carousel.js"></script>
         <!-- Google Map -->
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
-        <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbkei5hOu4A6TSywLOy0VrC3e9cWAUf5w"></script>
+        <script type="text/javascript" src="js/markerwithlabel.js"></script>
         <!-- RSVP -->
         <script src="js/rsvp/rsvp.js"></script>
         
