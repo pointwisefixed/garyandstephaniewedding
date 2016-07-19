@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
-  resources :guests
+  resources :guests do
+    collection do
+      get 'count'
+    end
+
+    collection do
+      get 'export'
+    end
+  end
   resources :admin
   resources :users
 

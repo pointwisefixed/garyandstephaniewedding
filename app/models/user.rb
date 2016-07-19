@@ -31,4 +31,14 @@ class User < ActiveRecord::Base
     false
   end
 
+  def self.to_csv(exportable_users)
+    attributes = ["First Name", "Last Name", "Username", "Email", "RSVP?", "Plus one?","Entree", "Plus One Entree"]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes.map{ |value| value}
+      exportable_users.each do |guest|
+        csv << [guest.first_name, guest.last_name, guest.username, guest.email, guest.attending, guest.plusone, guest.entree ? guest.entree.description : "", guest.plus_one_entree ? guest.plus_one_entree.description : ""]
+      end
+    end
+  end
 end

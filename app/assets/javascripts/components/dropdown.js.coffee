@@ -32,12 +32,12 @@
     @setState selected: selected
     return
   getSelectedFromProps: (props) ->
-    selected = undefined
+    selected     =undefined
     if props.value == null and props.options.length != 0
-      selected = props.options[0][props.valueField]
+      selected   =props.options[0][props.valueField]
     else
-      selected = props.value
-    selected
+      selected   =props.value
+    return selected
   render: ->
     self = this
     options = self.props.options.map((option) ->

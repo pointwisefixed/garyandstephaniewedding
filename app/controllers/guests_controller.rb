@@ -6,7 +6,22 @@ class GuestsController < ApplicationController
     @guests = User.all
     @entrees = Entree.all
     @entrees.unshift(Entree.new(:name => "None", :description => "Choose an entree", :id => -1))
-    @attending_count = User.where(:plusone => true).count + User.where(:attending => true).count
+    @attending_count = count_guests 
+  end
+
+  def count_guests
+    User.where(:plusone => true).count + User.where(:attending => true).count
+  end
+
+  def count
+    render json: count_guests
+  end
+
+  def export
+    attending_users = User.where(:attending => true)
+    respond_to do |format|
+      format.csv {send_data User.to_csv(attending_users), filename: "guests-#{Date.today}.csv"}
+    end
   end
 
   def create
