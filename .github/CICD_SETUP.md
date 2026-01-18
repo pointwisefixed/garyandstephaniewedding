@@ -82,18 +82,20 @@ Value: <your-service-id>
 
 #### Additional Secrets (All Platforms):
 ```
-Name: RAILS_MASTER_KEY
-Value: <content of config/master.key>
+Name: SECRET_KEY_BASE
+Value: <test secret from config/secrets.yml>
 
-Name: SMTP_ADDRESS
+Name: SMTP_ADDRESS (optional)
 Value: mail.garyandstephanie.com
 
-Name: SMTP_USERNAME
+Name: SMTP_USERNAME (optional)
 Value: wedding@garyandstephanie.com
 
-Name: SMTP_PASSWORD
+Name: SMTP_PASSWORD (optional)
 Value: <your-smtp-password>
 ```
+
+**Note:** This app uses `config/secrets.yml` (legacy Rails 4 approach) instead of encrypted credentials. See [SECRETS_SETUP.md](./SECRETS_SETUP.md) for detailed configuration.
 
 ### 3. Test Your CI/CD Pipeline
 
