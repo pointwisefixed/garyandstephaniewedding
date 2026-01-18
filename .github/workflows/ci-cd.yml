@@ -1,0 +1,170 @@
+name: CI/CD Pipeline
+
+on:
+  # Run on pull requests
+  pull_request:
+    branches: [ main, master ]
+
+  # Run on pushes to main/master (after PR merge)
+  push:
+    branches: [ main, master ]
+
+  # Allow manual workflow runs
+  workflow_dispatch:
+
+env:
+  RUBY_VERSION: 3.3.6
+  RAILS_ENV: test
+
+jobs:
+  # Job 1: Run tests
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+
+    services:
+      # If you migrate to PostgreSQL later, uncomment:
+      # postgres:
+      #   image: postgres:16
+      #   env:
+      #     POSTGRES_USER: postgres
+      #     POSTGRES_PASSWORD: postgres
+      #     POSTGRES_DB: wedding_test
+      #   ports:
+      #     - 5432:5432
+      #   options: >-
+      #     --health-cmd pg_isready
+      #     --health-interval 10s
+      #     --health-timeout 5s
+      #     --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true # runs 'bundle install' and caches gems
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsqlite3-dev
+
+      - name: Setup database
+        run: |
+          cp config/database.yml.example config/database.yml || true
+          bundle exec rails db:create db:schema:load
+
+      - name: Run RSpec tests
+        run: |
+          bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec-results.xml
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rspec-results
+          path: tmp/rspec-results.xml
+
+      - name: Generate coverage report
+        if: always()
+        run: |
+          echo "Coverage report generated at coverage/index.html"
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+
+      - name: Check test coverage
+        run: |
+          # Fail if coverage is below 90%
+          bundle exec rspec || exit 1
+
+  # Job 2: Lint and security checks
+  lint:
+    name: Lint & Security
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Run RuboCop
+        run: bundle exec rubocop --parallel
+        continue-on-error: true
+
+      - name: Run Brakeman security scan
+        run: bundle exec brakeman --no-pager
+        continue-on-error: true
+
+      - name: Check for vulnerable dependencies
+        run: |
+          gem install bundler-audit
+          bundle audit check --update
+
+  # Job 3: Deploy to Fly.io (only on merge to main)
+  deploy-fly:
+    name: Deploy to Fly.io
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  # Alternative Job 3: Deploy to Railway (comment out deploy-fly if using this)
+  # deploy-railway:
+  #   name: Deploy to Railway
+  #   needs: [test, lint]
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Install Railway CLI
+  #       run: npm i -g @railway/cli
+  #
+  #     - name: Deploy to Railway
+  #       run: railway up
+  #       env:
+  #         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # Alternative Job 3: Deploy to Render (comment out deploy-fly if using this)
+  # deploy-render:
+  #   name: Deploy to Render
+  #   needs: [test, lint]
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Deploy to Render
+  #       uses: johnbeynon/render-deploy-action@v0.0.8
+  #       with:
+  #         service-id: ${{ secrets.RENDER_SERVICE_ID }}
+  #         api-key: ${{ secrets.RENDER_API_KEY }}

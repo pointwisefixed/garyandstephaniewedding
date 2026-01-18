@@ -89,6 +89,9 @@ group :development, :test do
 
   # Shoulda matchers for easier model testing
   gem 'shoulda-matchers', '~> 6.4'
+
+  # RSpec JUnit formatter for CI
+  gem 'rspec_junit_formatter', '~> 0.6'
 end
 
 group :development do

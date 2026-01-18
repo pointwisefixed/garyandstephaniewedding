@@ -1,0 +1,51 @@
+# Auto-labeler configuration for PRs
+# Labels PRs based on which files are changed
+
+'dependencies':
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - yarn.lock
+
+'documentation':
+  - '**/*.md'
+  - 'docs/**/*'
+  - '.github/**/*.md'
+
+'tests':
+  - 'spec/**/*'
+  - 'test/**/*'
+
+'controllers':
+  - 'app/controllers/**/*'
+
+'models':
+  - 'app/models/**/*'
+
+'views':
+  - 'app/views/**/*'
+
+'assets':
+  - 'app/assets/**/*'
+  - 'public/**/*'
+
+'database':
+  - 'db/**/*'
+  - 'config/database.yml'
+
+'configuration':
+  - 'config/**/*'
+  - '.env*'
+  - 'Dockerfile'
+  - 'docker-compose.yml'
+
+'ci-cd':
+  - '.github/workflows/**/*'
+  - '.circleci/**/*'
+  - '.travis.yml'
+  - 'fly.toml'
+  - 'render.yaml'
+
+'security':
+  - 'config/credentials/**/*'
+  - 'config/master.key'
