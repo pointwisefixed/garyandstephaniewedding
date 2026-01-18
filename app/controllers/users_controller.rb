@@ -11,7 +11,7 @@ class UsersController < ApplicationController
      return
    end
 
-	 @user.update_attributes(user_params)
+	 @user.update(user_params)
 	 respond_to do |format|
     if @user.save
 						format.json {render :json => @user}

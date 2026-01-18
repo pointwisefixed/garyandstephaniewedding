@@ -1,5 +1,5 @@
 class GuestsController < ApplicationController
-  before_filter :verify_is_admin
+  before_action :verify_is_admin
   before_action :authenticate_user!
   
 	def index
