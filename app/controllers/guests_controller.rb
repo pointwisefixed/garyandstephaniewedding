@@ -52,7 +52,7 @@ class GuestsController < ApplicationController
   private
 
     def guest_params
-      params.require(:guest).permit(:password, :first_name, :last_name, :email, :admin, :attending, :plusone, :first_name, :last_name, :address1, :address2, :zipcode, :city, :state, :state, :country, :username, :plus_one_first_name, :plust_one_last_name, :entree_id, :plus_one_entree_id, :rsvp_edit_dateline, :can_bring_plus_one)
+      params.require(:guest).permit(:password, :first_name, :last_name, :email, :admin, :attending, :plusone, :first_name, :last_name, :address1, :address2, :zipcode, :city, :state, :state, :country, :username, :plus_one_first_name, :plus_one_last_name, :entree_id, :plus_one_entree_id, :rsvp_edit_dateline, :can_bring_plus_one)
     end
 
 	  def verify_is_admin
