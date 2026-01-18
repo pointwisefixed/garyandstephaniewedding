@@ -1,51 +1,73 @@
-# Auto-labeler configuration for PRs
+# Auto-labeler configuration for PRs (GitHub Actions labeler v5 format)
 # Labels PRs based on which files are changed
 
-'dependencies':
-  - Gemfile
-  - Gemfile.lock
-  - package.json
-  - yarn.lock
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - Gemfile
+      - Gemfile.lock
+      - package.json
+      - yarn.lock
 
-'documentation':
-  - '**/*.md'
-  - 'docs/**/*'
-  - '.github/**/*.md'
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+      - '.github/**/*.md'
 
-'tests':
-  - 'spec/**/*'
-  - 'test/**/*'
+tests:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'spec/**/*'
+      - 'test/**/*'
 
-'controllers':
-  - 'app/controllers/**/*'
+controllers:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/controllers/**/*'
 
-'models':
-  - 'app/models/**/*'
+models:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/models/**/*'
 
-'views':
-  - 'app/views/**/*'
+views:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/views/**/*'
 
-'assets':
-  - 'app/assets/**/*'
-  - 'public/**/*'
+assets:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/assets/**/*'
+      - 'public/**/*'
 
-'database':
-  - 'db/**/*'
-  - 'config/database.yml'
+database:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'db/**/*'
+      - 'config/database.yml'
 
-'configuration':
-  - 'config/**/*'
-  - '.env*'
-  - 'Dockerfile'
-  - 'docker-compose.yml'
+configuration:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'config/**/*'
+      - '.env*'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
 
-'ci-cd':
-  - '.github/workflows/**/*'
-  - '.circleci/**/*'
-  - '.travis.yml'
-  - 'fly.toml'
-  - 'render.yaml'
+ci-cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**/*'
+      - '.circleci/**/*'
+      - '.travis.yml'
+      - 'fly.toml'
+      - 'render.yaml'
 
-'security':
-  - 'config/credentials/**/*'
-  - 'config/master.key'
+security:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'config/credentials/**/*'
+      - 'config/master.key'
