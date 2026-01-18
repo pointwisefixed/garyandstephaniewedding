@@ -10,7 +10,8 @@ class GuestsController < ApplicationController
   end
 
   def count_guests
-    User.where(:plusone => true).count + User.where(:attending => true).count
+    # Count attending guests plus their plus-ones (avoid double-counting)
+    User.where(:attending => true).count + User.where(:plusone => true, :attending => true).count
   end
 
   def count
