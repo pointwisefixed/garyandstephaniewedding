@@ -1,5 +1,5 @@
 class GuestsController < ApplicationController
-  before_filter :verify_is_admin
+  before_action :verify_is_admin
   before_action :authenticate_user!
   
 	def index
@@ -10,7 +10,8 @@ class GuestsController < ApplicationController
   end
 
   def count_guests
-    User.where(:plusone => true).count + User.where(:attending => true).count
+    # Count attending guests plus their plus-ones (avoid double-counting)
+    User.where(:attending => true).count + User.where(:plusone => true, :attending => true).count
   end
 
   def count
@@ -52,7 +53,7 @@ class GuestsController < ApplicationController
   private
 
     def guest_params
-      params.require(:guest).permit(:password, :first_name, :last_name, :email, :admin, :attending, :plusone, :first_name, :last_name, :address1, :address2, :zipcode, :city, :state, :state, :country, :username, :plus_one_first_name, :plust_one_last_name, :entree_id, :plus_one_entree_id, :rsvp_edit_dateline, :can_bring_plus_one)
+      params.require(:guest).permit(:password, :first_name, :last_name, :email, :admin, :attending, :plusone, :first_name, :last_name, :address1, :address2, :zipcode, :city, :state, :state, :country, :username, :plus_one_first_name, :plus_one_last_name, :entree_id, :plus_one_entree_id, :rsvp_edit_dateline, :can_bring_plus_one)
     end
 
 	  def verify_is_admin

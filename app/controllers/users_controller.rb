@@ -4,9 +4,16 @@ class UsersController < ApplicationController
 
 	def update
    @user = User.find(params[:id])
-	 @user.update_attributes(user_params)			
+
+   # Security: Ensure users can only update their own records
+   unless @user == current_user || (current_user.respond_to?(:admin?) && current_user.admin?)
+     render json: { error: 'Unauthorized' }, status: :forbidden
+     return
+   end
+
+	 @user.update(user_params)
 	 respond_to do |format|
-    if @user.save						
+    if @user.save
 						format.json {render :json => @user}
 		end
 	 end
@@ -15,7 +22,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-					params.require(:user).permit(:email, :attending, :plusone, :plus_one_first_name, :plust_one_last_name, :entree_id, :plus_one_entree_id)
+					params.require(:user).permit(:email, :attending, :plusone, :plus_one_first_name, :plus_one_last_name, :entree_id, :plus_one_entree_id)
 	end
 end
 

@@ -1,0 +1,73 @@
+# Auto-labeler configuration for PRs (GitHub Actions labeler v5 format)
+# Labels PRs based on which files are changed
+
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - Gemfile
+      - Gemfile.lock
+      - package.json
+      - yarn.lock
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+      - '.github/**/*.md'
+
+tests:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'spec/**/*'
+      - 'test/**/*'
+
+controllers:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/controllers/**/*'
+
+models:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/models/**/*'
+
+views:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/views/**/*'
+
+assets:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'app/assets/**/*'
+      - 'public/**/*'
+
+database:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'db/**/*'
+      - 'config/database.yml'
+
+configuration:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'config/**/*'
+      - '.env*'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+
+ci-cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**/*'
+      - '.circleci/**/*'
+      - '.travis.yml'
+      - 'fly.toml'
+      - 'render.yaml'
+
+security:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'config/credentials/**/*'
+      - 'config/master.key'
