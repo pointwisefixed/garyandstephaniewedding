@@ -53,13 +53,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libsqlite3-dev
 
-      - name: Setup secrets and database
+      - name: Setup credentials and database
         run: |
           cp config/database.yml.example config/database.yml || true
-          # Use secrets.yml instead of master.key for this legacy app
+          # Create master.key from GitHub Secret for encrypted credentials
+          echo "${{ secrets.RAILS_MASTER_KEY }}" > config/master.key
           bundle exec rails db:create db:schema:load
-        env:
-          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
 
       - name: Run RSpec tests
         run: |

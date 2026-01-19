@@ -1,6 +1,14 @@
 # Secrets Configuration Guide
 
-This application uses the legacy Rails `config/secrets.yml` approach (from Rails 4.2) rather than the modern encrypted credentials system.
+This application now uses **Rails encrypted credentials** (the modern approach introduced in Rails 5.2+).
+
+## How It Works
+
+**Files:**
+- `config/credentials.yml.enc` - Encrypted credentials file (safe to commit to git)
+- `config/master.key` - 32-character decryption key (**NEVER commit this!**)
+
+The `master.key` is used to decrypt the encrypted credentials file. This is much more secure than storing secrets in plain text.
 
 ## Required GitHub Secrets
 
@@ -8,14 +16,20 @@ Go to your GitHub repository → **Settings** → **Secrets and variables** → 
 
 ### For CI/CD to Work:
 
-#### 1. SECRET_KEY_BASE (Required for tests)
+#### 1. RAILS_MASTER_KEY (Required)
 ```
-Name: SECRET_KEY_BASE
-Value: 39bb45acf1e431fc5fb8ebbfb6cd9fe381290b9fe644cb1633ef081089273436b5e7a54f2cd6f4c54fc45370003566d6db2822101df23ae076c04ed3949898d3
+Name: RAILS_MASTER_KEY
+Value: 3d2a4c299d551b8126bca99d4df68771
 ```
-This is the test secret from `config/secrets.yml`. It's safe to commit to GitHub Secrets.
 
-#### 2. Production Secrets (Required for deployment)
+**To get your master key:**
+```bash
+cat config/master.key
+```
+
+⚠️ **IMPORTANT:** Keep this key secret! Anyone with this key can decrypt your credentials.
+
+#### 2. Deployment Platform Secrets
 
 **For Fly.io:**
 ```
@@ -38,127 +52,172 @@ Name: RENDER_SERVICE_ID
 Value: <get from your service URL>
 ```
 
-#### 3. Email Configuration (Optional)
+## Viewing/Editing Credentials
 
-If you want emails to work in production:
-```
-Name: SMTP_ADDRESS
-Value: mail.garyandstephanie.com
-
-Name: SMTP_USERNAME
-Value: wedding@garyandstephanie.com
-
-Name: SMTP_PASSWORD
-Value: <your-smtp-password>
+### View Credentials (Decrypted)
+```bash
+EDITOR=cat rails credentials:show
 ```
 
-## How Secrets Work in This App
+### Edit Credentials
+```bash
+EDITOR=nano rails credentials:edit
+```
 
-### Development & Test
-Secrets are read from `config/secrets.yml`:
+This will decrypt, open in nano, and re-encrypt on save.
+
+### Current Credentials Structure
 ```yaml
-development:
-  secret_key_base: <dev-secret>
+secret_key_base: <your-secret-key>
 
-test:
-  secret_key_base: <test-secret>
+smtp:
+  address: mail.garyandstephanie.com
+  port: 25
+  username: wedding@garyandstephanie.com
+  password: <smtp-password>
+  authentication: plain
+
+mailer:
+  host: garyandstephanie.com
 ```
 
-### Production (Two Options)
+## Deployment Platform Setup
 
-**Option A: Use Environment Variable (Recommended)**
+Each platform needs the `RAILS_MASTER_KEY` environment variable to decrypt credentials in production.
 
-Set `SECRET_KEY_BASE` environment variable on your deployment platform:
-
-**Fly.io:**
-```bash
-fly secrets set SECRET_KEY_BASE=452e71b269e3773a6b89a16f327e9520b2c23011978c7c24f80c9526831b23a447dd2c32eb3ee5fed4daf8b9f3f604f5080da7967b804921a98dfa0256d8679b
-```
-
-**Railway:**
-Add in Railway dashboard → Variables:
-```
-SECRET_KEY_BASE=452e71b269e3773a6b89a16f327e9520b2c23011978c7c24f80c9526831b23a447dd2c32eb3ee5fed4daf8b9f3f604f5080da7967b804921a98dfa0256d8679b
-```
-
-**Render:**
-Add in Render dashboard → Environment:
-```
-SECRET_KEY_BASE=452e71b269e3773a6b89a16f327e9520b2c23011978c7c24f80c9526831b23a447dd2c32eb3ee5fed4daf8b9f3f604f5080da7967b804921a98dfa0256d8679b
-```
-
-**Option B: Use secrets.yml**
-
-Deploy `config/secrets.yml` with your app (already in the repo).
-
-## Security Note
-
-⚠️ **Your production secret key is currently in the public repository** (`config/secrets.yml`).
-
-### To Improve Security:
-
-1. **Generate a new production secret:**
-   ```bash
-   rails secret
-   ```
-
-2. **Update secrets.yml production section:**
-   ```yaml
-   production:
-     secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
-   ```
-
-3. **Set the environment variable on your platform** (see commands above)
-
-4. **Commit the change:**
-   ```bash
-   git add config/secrets.yml
-   git commit -m "Use environment variable for production secret"
-   git push
-   ```
-
-This way, your production secret is never in the repository.
-
-## Migrating to Rails 7 Encrypted Credentials (Optional)
-
-If you want to use the modern Rails approach:
+### Fly.io
 
 ```bash
-# Generate credentials file
+# Set the master key
+fly secrets set RAILS_MASTER_KEY=$(cat config/master.key)
+
+# Verify it's set
+fly secrets list
+```
+
+### Railway
+
+1. Go to your Railway project
+2. Click on "Variables" tab
+3. Add new variable:
+   - Key: `RAILS_MASTER_KEY`
+   - Value: (paste content of config/master.key)
+
+### Render
+
+1. Go to your Render dashboard
+2. Select your web service
+3. Go to "Environment" tab
+4. Add environment variable:
+   - Key: `RAILS_MASTER_KEY`
+   - Value: (paste content of config/master.key)
+
+## Security Best Practices
+
+### ✅ DO:
+- Keep `config/master.key` in `.gitignore` (already configured)
+- Store `RAILS_MASTER_KEY` in GitHub Secrets
+- Set `RAILS_MASTER_KEY` as environment variable on deployment platforms
+- Rotate your master key if it's ever compromised
+- Back up your master key in a secure password manager
+
+### ❌ DON'T:
+- Never commit `config/master.key` to git
+- Never share your master key publicly
+- Never hardcode secrets in your application code
+- Never send the master key via email or chat
+
+## Troubleshooting
+
+### "Missing encryption key" error
+
+**In development:**
+```bash
+# Make sure config/master.key exists
+ls -la config/master.key
+
+# If missing, you can't decrypt credentials without the key
+# Contact someone on the team who has it
+```
+
+**In production:**
+```bash
+# Check if RAILS_MASTER_KEY is set
+fly secrets list  # for Fly.io
+
+# If not set, add it:
+fly secrets set RAILS_MASTER_KEY=<your-key>
+```
+
+### "ActiveSupport::MessageEncryptor::InvalidMessage" error
+
+This means the master key doesn't match the encrypted credentials file.
+
+**Solution:**
+1. Make sure you're using the correct master key
+2. Or regenerate credentials with a new key (will lose existing credentials)
+
+### Need to regenerate everything?
+
+```bash
+# Delete old files
+rm config/credentials.yml.enc config/master.key
+
+# Create new credentials
 EDITOR=nano rails credentials:edit
 
-# This creates:
-# - config/credentials.yml.enc (encrypted, safe to commit)
-# - config/master.key (keep secret, add to .gitignore)
-
-# Then add to GitHub Secrets:
-# RAILS_MASTER_KEY = <content of config/master.key>
+# This creates new credentials.yml.enc and master.key
+# Add your secrets, save, and exit
 ```
 
-But for this wedding website, the simpler secrets.yml approach is fine!
+## Migrating SMTP Password
 
-## Current Setup Summary
+If you need to update the SMTP password:
 
-✅ **Development**: Uses hardcoded secret from secrets.yml
-✅ **Test**: Uses hardcoded secret from secrets.yml
-⚠️ **Production**: Uses hardcoded secret from secrets.yml (consider moving to ENV)
+```bash
+# Edit credentials
+EDITOR=nano rails credentials:edit
 
-## Quick Reference: What to Add to GitHub Secrets
+# Update the smtp.password value
+# Save and exit
 
-**Minimum (for tests to pass):**
-```
-SECRET_KEY_BASE = <test secret from secrets.yml>
-```
-
-**For deployment:**
-```
-FLY_API_TOKEN = <your fly.io token>
-# or RAILWAY_TOKEN / RENDER_API_KEY depending on platform
+# Redeploy to production
+git push  # triggers CI/CD
 ```
 
-**Optional (for emails):**
-```
-SMTP_PASSWORD = <your email password>
-```
+No need to update environment variables on the deployment platform!
 
-That's it! 🎉
+## What's Stored in Credentials
+
+Currently stored:
+- ✅ `secret_key_base` - Rails session encryption key
+- ✅ `smtp.*` - Email server configuration
+- ✅ `mailer.host` - Email link host
+
+You can add more:
+- API keys (Stripe, AWS, etc.)
+- Third-party service credentials
+- Any other sensitive configuration
+
+## Advantages of This Approach
+
+✅ **Secure:** Secrets are encrypted at rest
+✅ **Version controlled:** Encrypted file can be committed safely
+✅ **Centralized:** All secrets in one place
+✅ **Standard:** Rails best practice since 5.2
+✅ **Team-friendly:** Each environment can have different keys
+
+## Quick Reference
+
+| Task | Command |
+|------|---------|
+| View credentials | `EDITOR=cat rails credentials:show` |
+| Edit credentials | `EDITOR=nano rails credentials:edit` |
+| Get master key | `cat config/master.key` |
+| Set on Fly.io | `fly secrets set RAILS_MASTER_KEY=$(cat config/master.key)` |
+| Set on Railway | Add in Variables tab |
+| Set on Render | Add in Environment tab |
+
+---
+
+**🎉 You're now using modern Rails encrypted credentials!**
