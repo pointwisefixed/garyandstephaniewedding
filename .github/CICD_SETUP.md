@@ -83,13 +83,15 @@ Value: <your-service-id>
 #### Additional Secrets (All Platforms):
 ```
 Name: RAILS_MASTER_KEY
-Value: 3d2a4c299d551b8126bca99d4df68771
+Value: <paste the content of your config/master.key file>
 ```
 
 **To get your master key:**
 ```bash
 cat config/master.key
 ```
+
+⚠️ **IMPORTANT:** Never commit or share your master.key file publicly!
 
 **Note:** This app now uses Rails encrypted credentials (modern approach). All secrets including SMTP configuration are stored in the encrypted `config/credentials.yml.enc` file and decrypted using the master key. See [SECRETS_SETUP.md](./SECRETS_SETUP.md) for detailed configuration.
 

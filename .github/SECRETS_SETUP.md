@@ -19,7 +19,7 @@ Go to your GitHub repository → **Settings** → **Secrets and variables** → 
 #### 1. RAILS_MASTER_KEY (Required)
 ```
 Name: RAILS_MASTER_KEY
-Value: 3d2a4c299d551b8126bca99d4df68771
+Value: <paste the content of your config/master.key file>
 ```
 
 **To get your master key:**
@@ -27,7 +27,8 @@ Value: 3d2a4c299d551b8126bca99d4df68771
 cat config/master.key
 ```
 
-⚠️ **IMPORTANT:** Keep this key secret! Anyone with this key can decrypt your credentials.
+⚠️ **CRITICAL:** Keep this key secret! Anyone with this key can decrypt your credentials.
+⚠️ **NEVER** commit config/master.key to git or share it publicly!
 
 #### 2. Deployment Platform Secrets
 
