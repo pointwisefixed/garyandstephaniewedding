@@ -120,3 +120,5 @@ group :test do
   # Database cleaner for tests
   gem 'database_cleaner-active_record', '~> 2.2'
 end
+
+gem "dockerfile-rails", ">= 1.7", :group => :development
