@@ -22,4 +22,5 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  # Use persistent volume mounted at /data for Fly.io
+  database: /data/production.sqlite3
