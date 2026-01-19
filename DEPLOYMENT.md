@@ -10,12 +10,15 @@ Complete guide to deploy the wedding website to Fly.io.
 
 This is the **ONLY** environment variable you need to set. All other secrets (SMTP password, secret_key_base, etc.) are encrypted in `config/credentials.yml.enc` and will be automatically decrypted using this key.
 
-**Your Master Key:**
-```
-db79ed25e3391a11e8e023c7aff83470
+**Get your Master Key:**
+```bash
+cat config/master.key
 ```
 
-⚠️ **IMPORTANT:** Keep this key secret! Store it in a password manager.
+⚠️ **CRITICAL:**
+- Keep this key secret! Store it in a password manager.
+- NEVER commit config/master.key to git
+- NEVER share it publicly or in documentation
 
 ---
 
@@ -75,7 +78,7 @@ fly volumes list
 
 ```bash
 # Set the RAILS_MASTER_KEY secret
-fly secrets set RAILS_MASTER_KEY=db79ed25e3391a11e8e023c7aff83470
+fly secrets set RAILS_MASTER_KEY=<your-master-key-from-config-master.key>
 
 # Verify it's set (shows digest, not actual value)
 fly secrets list
@@ -288,7 +291,7 @@ fly regions add lax
 fly secrets list
 
 # If missing, set it
-fly secrets set RAILS_MASTER_KEY=db79ed25e3391a11e8e023c7aff83470
+fly secrets set RAILS_MASTER_KEY=<your-master-key-from-config-master.key>
 ```
 
 ### Database Connection Error
