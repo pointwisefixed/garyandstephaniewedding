@@ -75,20 +75,19 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  # SECURITY: Use environment variables for sensitive credentials
-  # Set these in your production environment or use Rails credentials
-  if ENV['SMTP_ADDRESS'].present?
-    config.action_mailer.smtp_settings = {
-      address: ENV.fetch('SMTP_ADDRESS', 'mail.garyandstephanie.com'),
-      port: ENV.fetch('SMTP_PORT', 25),
-      user_name: ENV['SMTP_USERNAME'],
-      password: ENV['SMTP_PASSWORD'],
-      authentication: ENV.fetch('SMTP_AUTHENTICATION', 'plain')
-    }
-  end
+  # Use Rails encrypted credentials for sensitive data
+  # Credentials are stored in config/credentials.yml.enc
+  # Decrypt with config/master.key (never commit this file!)
+  config.action_mailer.smtp_settings = {
+    address: Rails.application.credentials.dig(:smtp, :address),
+    port: Rails.application.credentials.dig(:smtp, :port),
+    user_name: Rails.application.credentials.dig(:smtp, :username),
+    password: Rails.application.credentials.dig(:smtp, :password),
+    authentication: Rails.application.credentials.dig(:smtp, :authentication)
+  }
 
   config.action_mailer.default_url_options = {
-    host: ENV.fetch('MAILER_HOST', 'garyandstephanie.com')
+    host: Rails.application.credentials.dig(:mailer, :host)
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
