@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
 
-  before_filter :verify_is_admin
+  before_action :verify_is_admin
 
   def index
     @weddingInfo = WeddingInfo.all[0]

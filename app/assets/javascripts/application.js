@@ -12,11 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require react
 //= require react_ujs
 //= require_tree ../../../vendor/assets/javascripts/quill
 //= require_tree ../../../vendor/assets/javascripts/react-quill
 //= require components
 //= require_tree .
-//= require bootstrap-sprockets
+//= require bootstrap
