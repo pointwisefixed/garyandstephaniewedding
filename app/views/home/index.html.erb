@@ -236,7 +236,7 @@
                             </div>                            
                             
                             <p class="blurb animation fadeInLeft text-center">
-			    <%= @weddingInfo.hisInformation.html_safe%>
+			    <%= @weddingInfo.hisInformation.to_s.html_safe%>
                             </p>
                             
                         </div>
@@ -274,7 +274,7 @@
                             </div>                            
                             
                             <p class="blurb animation fadeInRight text-center">
-			    <%= @weddingInfo.herInformation.html_safe %>
+			    <%= @weddingInfo.herInformation.to_s.html_safe %>
                             </p>
                             
                         </div>
@@ -306,7 +306,7 @@
                             	</h2>
                             
 				<p>
-				<%= @weddingInfo.ourStory.html_safe %>
+				<%= @weddingInfo.ourStory.to_s.html_safe %>
                             	</p>
                             
                             	
@@ -359,7 +359,7 @@
                         
                         <div class="col-sm-12 col-md-4 animation delay1 fadeInRight">
                         	<h3>OUR FIRST MEETING</h3>
-				<p><%= @weddingInfo.ourFirstMeeting.html_safe %></p>                            
+				<p><%= @weddingInfo.ourFirstMeeting.to_s.html_safe %></p>                            
                         </div>    
                         
                         <div class="vertical-line">
@@ -411,7 +411,7 @@
                         
                         <div class="col-sm-12 col-md-4 col-md-pull-6 animation delay1 fadeInRight">
                         	<h3>OUR FIRST DATE</h3>
-				<p> <%= @weddingInfo.ourFirstDate.html_safe %></p>                            
+				<p> <%= @weddingInfo.ourFirstDate.to_s.html_safe %></p>                            
                         </div>    
                         
                         <div class="vertical-line">
@@ -463,7 +463,7 @@
                         
                         <div class="col-md-4 animation delay1 fadeInRight">
                         	<h3>HE PROPOSED</h3>
-				<p><%= @weddingInfo.proposal.html_safe %> </p>
+				<p><%= @weddingInfo.proposal.to_s.html_safe %> </p>
                             
                         </div>    
                         
@@ -516,7 +516,7 @@
                         
                         <div class="col-sm-12 col-md-4 col-md-pull-6 animation delay1 fadeInRight">
                         	<h3>THE RING</h3>
-				<p><%= @weddingInfo.theRing.html_safe %> </p>                            
+				<p><%= @weddingInfo.theRing.to_s.html_safe %> </p>                            
                         </div>    
                         
                         <div class="vertical-line">
@@ -563,7 +563,7 @@
                             		WHERE <span class="and">&amp;</span> WHEN
                             	</h2>
                             
-                            	<p> <%= @weddingInfo.whenAndWhereIsTheWedding.html_safe %></p>
+                            	<p> <%= @weddingInfo.whenAndWhereIsTheWedding.to_s.html_safe %></p>
                             
                             	
                           	</div>
@@ -608,19 +608,19 @@
                             	<i class="de-icon-bell-alt"></i>
                             </div>
                             <h3 class="inline">CEREMONY</h3>
-			    <p><%= @weddingInfo.ceremony.html_safe %></p>
+			    <p><%= @weddingInfo.ceremony.to_s.html_safe %></p>
                                
                        		<div class="de-icon circle small-size inline" style="background-color:#f6700e">
                             	<i class="de-icon-food"></i>
                             </div>
                             <h3 class="inline">RECEPTION</h3>
-			    <p><%= @weddingInfo.reception.html_safe %></p>
+			    <p><%= @weddingInfo.reception.to_s.html_safe %></p>
                             
 							<div class="de-icon circle small-size inline" style="background-color:#0d9a48">
                             	<i class="de-icon-home-1"></i>
                             </div>
                             <h3 class="inline">ACCOMODATION</h3>
-			    <p><%= @weddingInfo.accomodations.html_safe %></p>                            
+			    <p><%= @weddingInfo.accomodations.to_s.html_safe %></p>                            
                                                        
                         </div>
                         
@@ -646,7 +646,7 @@
                                 </div>        
                                 
                                 <div class="text-center animation fadeInUp">
-					<p><%= @weddingInfo.attending.html_safe %></p>
+					<p><%= @weddingInfo.attending.to_s.html_safe %></p>
                                 </div>  
                                 
                                 <div  class="text-center">
@@ -684,7 +684,7 @@
                             	</h2>
                             
                             	<p>
-				<%= @weddingInfo.ourGallery.html_safe %>	
+				<%= @weddingInfo.ourGallery.to_s.html_safe %>	
                             	</p>
                             
                             	
@@ -1077,7 +1077,7 @@
                 	 			
                          <h2 id="dont-miss-it-title" class="text-center animation fadeInUp" style="color: black;">Don't Miss It!</h2>                               
 								                                <div class="text-center animation fadeInUp">
-					<p><%=@weddingInfo.dontMissIt.html_safe %></p>
+					<p><%=@weddingInfo.dontMissIt.to_s.html_safe %></p>
                                 </div>
  
 
@@ -1107,7 +1107,7 @@
                             	</h2>
                             
                             	<p>
-				<%= @weddingInfo.groomsmen.html_safe %>	
+				<%= @weddingInfo.groomsmen.to_s.html_safe %>	
                             	</p>
                             
                             	
@@ -1156,7 +1156,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">BEST MAN</a></h3>
-						<p><%= @weddingInfo.bestMan.html_safe %></p>
+						<p><%= @weddingInfo.bestMan.to_s.html_safe %></p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
@@ -1203,7 +1203,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">BEST FRIEND</a></h3>
-						<p><%= @weddingInfo.bestFriend.html_safe %> </p>
+						<p><%= @weddingInfo.bestFriend.to_s.html_safe %> </p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
@@ -1231,7 +1231,7 @@
                             	</h2>
                             
                             	<p>
-				<%= @weddingInfo.bridesmaid.html_safe %>           	</p>
+				<%= @weddingInfo.bridesmaid.to_s.html_safe %>           	</p>
                             
                             	
                           	</div>
@@ -1279,7 +1279,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">MAID OF HONOR</a></h3>
-						<p><%= @weddingInfo.maidOfHonor.html_safe %></p>
+						<p><%= @weddingInfo.maidOfHonor.to_s.html_safe %></p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
@@ -1326,7 +1326,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">GROOM'S SISTER</a></h3>
-						<p><%= @weddingInfo.bestBrideFriend.html_safe %></p>
+						<p><%= @weddingInfo.bestBrideFriend.to_s.html_safe %></p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
@@ -1371,7 +1371,7 @@
                         		<div class="title-excerpt animation fadeIn text-center">
                         
                         			<h3 class="no-margin"><a href="#">BEST FRIEND</a></h3>
-						<p><%= @weddingInfo.bestfriendbridesmaid.html_safe %></p>
+						<p><%= @weddingInfo.bestfriendbridesmaid.to_s.html_safe %></p>
                             
                         		</div><!-- END of TITLE & EXCERPT -->
                                 
