@@ -22,11 +22,11 @@ primary_region = "iad"  # Change to your preferred region (iad=US East, lax=US W
   processes = ["app"]
 
   [[http_service.checks]]
-    grace_period = "10s"
+    grace_period = "120s"
     interval = "30s"
     method = "GET"
     timeout = "5s"
-    path = "/"
+    path = "/up"
 
 [[mounts]]
   source = "sqlite_data"
@@ -35,4 +35,4 @@ primary_region = "iad"  # Change to your preferred region (iad=US East, lax=US W
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 256
+  memory_mb = 512

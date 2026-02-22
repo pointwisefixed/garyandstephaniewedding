@@ -1,9 +1,15 @@
 source 'https://rubygems.org'
 
-ruby '3.3.6'
+ruby '3.4.1'
 
-# Fix for CGI compatibility issue
+# Fix for CGI compatibility issue (0.4.x for Ruby 3.4+)
 gem 'cgi', '~> 0.4.1'
+
+# Pin connection_pool to 2.x for react-rails compatibility
+gem 'connection_pool', '~> 2.4'
+
+# jQuery for legacy JavaScript
+gem 'jquery-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.2.0'

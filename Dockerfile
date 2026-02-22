@@ -2,7 +2,7 @@
 
 # This Dockerfile is designed for production, not development. Use with Fly.io.
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.3.6
+ARG RUBY_VERSION=3.4.1
 FROM ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -26,12 +26,14 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed to build gems
+# Install packages needed to build gems and Node.js for JavaScript runtime
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
     build-essential \
     git \
-    pkg-config && \
+    pkg-config \
+    nodejs \
+    npm && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
@@ -59,6 +61,7 @@ COPY --from=build /rails /rails
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    mkdir -p db log storage tmp /data && \
     chown -R rails:rails db log storage tmp /data
 USER 1000:1000
 
